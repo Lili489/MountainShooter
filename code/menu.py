@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from turtledemo.nim import COLOR
 
-import pygame
+import pygame.image
 from pygame import Surface, Rect
 from pygame.font import Font
 
