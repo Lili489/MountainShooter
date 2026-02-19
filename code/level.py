@@ -7,8 +7,7 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.const import C_WHITE, WIN_HEIGHT, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME, C_GREEN, C_CYAN, EVENT_TIMEOUT, \
-    TIMEOUT_STEP
+from code.const import C_WHITE, WIN_HEIGHT, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME, C_GREEN, C_CYAN, EVENT_TIMEOUT, TIMEOUT_STEP, TIMEOUT_LEVEL
 from code.enemy import Enemy
 from code.entity import Entity
 from code.entityfactory import EntityFactory
@@ -25,11 +24,12 @@ class Level:
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity(self.name + 'Bg'))
         player = EntityFactory.get_entity('Player1')
-        play_score = play_score[0]
+        player = EntityFactory.get_entity('Player1')
+        player.score = play_score[0]
         self.entity_list.append(player)
         if game_mode in [MENU_OPTION[1], MENU_OPTION[2]]:
             player = EntityFactory.get_entity('Player2')
-            play_score = play_score[1]
+            player.score = play_score[1]
             self.entity_list.append(player)
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)  #100ms
@@ -71,8 +71,7 @@ class Level:
                                 player_score[1] = ent.score
                         return True
 
-
-                found_player = false
+                found_player = False
                 for ent in self.entity_list:
                     if isinstance(ent, Player):
                         found_player = True
